@@ -17,6 +17,7 @@ A-Diary-Habits 是需要购买许可证并激活后使用完整功能的付费�
 
 激活码请通过作者的正式销售或联系渠道获取：
 
+- [购买 A-Diary-Habits 激活码](https://wzyp.cn/shop/NIAR958A)
 - QQ群：603045364
 - 微信：VinVinVin444
 - [Bilibili](https://space.bilibili.com/3493128231193555)
