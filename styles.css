@@ -1836,13 +1836,11 @@
   .a-diary-habits__diary-shell {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto auto;
-    height: max(520px, calc(100vh - 32px));
+    height: auto;
     min-height: 0;
     align-items: start;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    overscroll-behavior: contain;
-    scrollbar-gutter: stable;
+    overflow: visible;
+    overscroll-behavior: auto;
   }
 
   .a-diary-habits__diary-shell > .a-diary-habits__diary-section-stack {
@@ -1860,11 +1858,11 @@
   }
 
   .a-diary-habits__diary-files-stack {
-    min-height: 840px;
+    min-height: 0;
   }
 
   .a-diary-habits__diary-content-stack {
-    min-height: 620px;
+    min-height: 0;
   }
 
 }
@@ -5939,7 +5937,26 @@ details.a-diary-habits__manager-group:not([open]) > :not(summary) {
 
 @media (max-width: 760px) {
   .a-diary-habits.a-diary-habits-home {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     padding: 0;
+    overflow-x: clip;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits-home__content,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__hero,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__grid,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__grid > .a-diary-habits__card[data-section],
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__grid > .a-diary-habits__card[data-section] > .a-diary-habits__shared-section-shell {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .a-diary-habits__hero {
@@ -5967,6 +5984,9 @@ details.a-diary-habits__manager-group:not([open]) > :not(summary) {
 
 .a-diary-habits__settings .a-diary-habits__setting-section-title {
   margin: 12px 0 4px;
+}
+
+.a-diary-habits__settings .a-diary-habits__setting-section-title .setting-item-name {
   font-size: 15px;
   font-weight: 700;
 }
@@ -6767,6 +6787,7 @@ details.a-diary-habits__manager-group:not([open]) > :not(summary) {
 
 [data-vin-bottom-toolbar-host="a-diary-habits"] {
   --dashboard-node-radius: 8px;
+  --dashboard-scroll-toolbar-clearance: 88px;
   --island-mint-soft: #d2e8bd;
   --island-cream: #fffdf2;
   --island-cream-soft: #fffbee;
@@ -6779,6 +6800,18 @@ details.a-diary-habits__manager-group:not([open]) > :not(summary) {
       transparent 22px 29px
     ),
     linear-gradient(180deg, #f3c681 0%, #e5aa66 52%, #cc8242 100%);
+  overflow-anchor: none;
+}
+
+[data-vin-bottom-toolbar-host="a-diary-habits"] .dashboard-home__scroll-end-spacer {
+  display: block;
+  width: 100%;
+  height: calc(var(--dashboard-scroll-toolbar-clearance) + 24px);
+  min-height: calc(var(--dashboard-scroll-toolbar-clearance) + 24px);
+  flex: 0 0 calc(var(--dashboard-scroll-toolbar-clearance) + 24px);
+  clear: both;
+  pointer-events: none;
+  overflow-anchor: none;
 }
 
 [data-vin-bottom-toolbar-host="a-diary-habits"] .dashboard-home__scroll-toolbar {
@@ -7557,6 +7590,125 @@ details.a-diary-habits__manager-group:not([open]) > :not(summary) {
 }
 
 /* END BottomScrollToolbar v2.0.0 */
+
+/* BottomScrollToolbar v2.2.18: compact mobile bottom dock above Obsidian navigation. */
+.dashboard-home__section-target--mobile {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  [data-vin-bottom-toolbar-host="a-diary-habits"] .dashboard-home__section-target--desktop {
+    display: none !important;
+  }
+
+  [data-vin-bottom-toolbar-host="a-diary-habits"] .dashboard-home__section-target--mobile {
+    display: flex !important;
+  }
+
+  [data-vin-bottom-toolbar-host="a-diary-habits"] {
+    --dashboard-mobile-native-toolbar-clearance: var(--mobile-navbar-height, var(--mobile-toolbar-height, 48px));
+    --dashboard-scroll-toolbar-clearance: calc(var(--dashboard-mobile-native-toolbar-clearance) + 58px);
+  }
+
+  [data-vin-bottom-toolbar-host="a-diary-habits"] .dashboard-home__scroll-toolbar {
+    --dashboard-mobile-scroll-button-size: 34px;
+    top: auto;
+    right: 4px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + var(--dashboard-mobile-native-toolbar-clearance) + 8px);
+    left: 4px;
+    width: max-content;
+    max-width: calc(100% - 8px);
+    margin-inline: auto;
+    gap: 4px;
+    padding: 4px;
+    overflow: visible;
+    justify-content: center;
+    transform: none !important;
+  }
+
+  [data-vin-bottom-toolbar-host="a-diary-habits"] :is(
+    .dashboard-home__scroll-toolbar-button,
+    .dashboard-home__theme-launcher,
+    .dashboard-home__plugin-launcher
+  ) {
+    box-sizing: border-box;
+    width: var(--dashboard-mobile-scroll-button-size) !important;
+    min-width: var(--dashboard-mobile-scroll-button-size) !important;
+    max-width: var(--dashboard-mobile-scroll-button-size) !important;
+    height: var(--dashboard-mobile-scroll-button-size) !important;
+    min-height: var(--dashboard-mobile-scroll-button-size) !important;
+    max-height: var(--dashboard-mobile-scroll-button-size) !important;
+    flex-basis: var(--dashboard-mobile-scroll-button-size) !important;
+    aspect-ratio: 1 / 1;
+  }
+
+  [data-vin-bottom-toolbar-host="a-diary-habits"] .dashboard-home__scroll-toolbar-button {
+    padding: calc(var(--dashboard-mobile-scroll-button-size) / 12);
+    border-radius: calc(var(--dashboard-mobile-scroll-button-size) / 6) !important;
+  }
+
+  [data-vin-bottom-toolbar-host="a-diary-habits"] .dashboard-home__scroll-toolbar-icon {
+    font-size: calc(var(--dashboard-mobile-scroll-button-size) / 3);
+  }
+
+  [data-vin-bottom-toolbar-host="a-diary-habits"] .dashboard-home__scroll-toolbar-label {
+    position: relative;
+    top: 2px;
+    margin-top: calc(var(--dashboard-mobile-scroll-button-size) / 18);
+    font-size: calc(var(--dashboard-mobile-scroll-button-size) * 0.1875);
+  }
+
+  [data-vin-bottom-toolbar-host="a-diary-habits"].a-diary-habits-toolbar--skin-island .dashboard-home__scroll-toolbar-button::after {
+    inset: calc(var(--dashboard-mobile-scroll-button-size) / 16);
+    border-radius: calc(var(--dashboard-mobile-scroll-button-size) / 6) !important;
+  }
+
+  [data-vin-bottom-toolbar-host="a-diary-habits"] .dashboard-home__theme-launcher-menu {
+    top: auto;
+    right: auto;
+    bottom: calc(100% + 8px);
+    left: 0;
+    transform: none;
+  }
+
+  [data-vin-bottom-toolbar-host="a-diary-habits"] .dashboard-home__plugin-launcher-menu {
+    top: auto;
+    right: 0;
+    bottom: calc(100% + 8px);
+    left: auto;
+    transform: none;
+  }
+
+  [data-vin-bottom-toolbar-host="a-diary-habits"] :is(
+    .dashboard-home__theme-launcher,
+    .dashboard-home__plugin-launcher
+  ):is(:hover, :focus-within):not(.is-mobile-open) :is(
+    .dashboard-home__theme-launcher-menu,
+    .dashboard-home__plugin-launcher-menu
+  ) {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  [data-vin-bottom-toolbar-host="a-diary-habits"] :is(
+    .dashboard-home__theme-launcher.is-mobile-open .dashboard-home__theme-launcher-menu,
+    .dashboard-home__plugin-launcher.is-mobile-open .dashboard-home__plugin-launcher-menu
+  ) {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  [data-vin-bottom-toolbar-host="a-diary-habits"] .dashboard-home__theme-launcher-menu::after,
+  [data-vin-bottom-toolbar-host="a-diary-habits"] .dashboard-home__plugin-launcher-menu::after {
+    top: auto;
+    right: 0;
+    bottom: -8px;
+    left: 0;
+    height: 8px;
+  }
+}
 
 /* Habit manager: keep every visible rectangular surface on the 8px project radius. */
 .a-diary-habits.a-diary-habits__manager-page {
@@ -11394,6 +11546,328 @@ body.theme-dark .modal-container :is(
   background-image: none !important;
   box-shadow: inset 0 0 0 1px var(--adh-island-edge) !important;
   color: #3f7954 !important;
+}
+
+/* MobileResponsive v1.0.0: four-section layout and native scroll boundaries. */
+@media (max-width: 760px) {
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__shared-section-header {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    max-height: none;
+  }
+
+  .a-diary-habits.a-diary-habits-home :is(
+    .a-diary-habits__shared-section-title-wrap,
+    .a-diary-habits__shared-section-actions
+  ) {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__shared-section-actions {
+    justify-content: flex-end;
+    margin-left: 0;
+    flex-wrap: wrap;
+  }
+
+  .a-diary-habits.a-diary-habits-home :is(
+    .a-diary-habits__module-toolbar,
+    .a-diary-habits__shared-toolbar,
+    .a-diary-habits__toolbar-left,
+    .a-diary-habits__toolbar-right,
+    .a-diary-habits__tag-period-controls,
+    .a-diary-habits__event-date-controls,
+    .a-diary-habits__event-view-controls
+  ) {
+    flex-wrap: wrap;
+    height: auto !important;
+    max-height: none !important;
+    align-content: flex-start;
+    row-gap: 8px;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__module-toolbar {
+    min-height: 54px;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(3, 48px);
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar > :is(
+    .a-diary-habits__toolbar-left,
+    .a-diary-habits__tag-period-controls,
+    .a-diary-habits__toolbar-right
+  ) {
+    display: contents;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar .a-diary-habits__shared-toolbar-separator {
+    display: none !important;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar :is(
+    .a-diary-habits__icon-button,
+    .a-diary-habits__tag-period
+  ) {
+    box-sizing: border-box;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
+    margin: 0 !important;
+    align-self: stretch;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar > .a-diary-habits__toolbar-left > .a-diary-habits__icon-button:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar > .a-diary-habits__toolbar-left > .a-diary-habits__icon-button:last-child {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar > .a-diary-habits__tag-period-controls > .a-diary-habits__icon-button:nth-of-type(5) {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar > .a-diary-habits__tag-period-controls > .a-diary-habits__icon-button:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar > .a-diary-habits__tag-period-controls > .a-diary-habits__tag-period {
+    grid-column: 2 / 4;
+    grid-row: 2;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar > .a-diary-habits__tag-period-controls > .a-diary-habits__icon-button:nth-of-type(2) {
+    grid-column: 4;
+    grid-row: 2;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar > .a-diary-habits__tag-period-controls > .a-diary-habits__icon-button:nth-of-type(3) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar > .a-diary-habits__tag-period-controls > .a-diary-habits__icon-button:nth-of-type(4) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar > .a-diary-habits__toolbar-right > .a-diary-habits__icon-button:nth-of-type(1) {
+    grid-column: 3;
+    grid-row: 3;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-toolbar > .a-diary-habits__toolbar-right > .a-diary-habits__icon-button:nth-of-type(2) {
+    grid-column: 4;
+    grid-row: 3;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__habit-toolbar {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__habit-toolbar-actions-center {
+    margin-left: auto;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__habit-toolbar > .a-diary-habits__shared-toolbar-actions-right {
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__habit-frame .a-diary-habits__first-group-title-row {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__habit-frame .a-diary-habits__first-group-title {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__habit-frame .a-diary-habits__group-title-actions--left {
+    grid-column: 1;
+    grid-row: 2;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__habit-frame .a-diary-habits__group-title-actions--right {
+    grid-column: 1;
+    grid-row: 3;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__diary-shell,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-shell,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__events-grid,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__daily-review-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__diary-shell {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    overscroll-behavior: auto;
+  }
+
+  .a-diary-habits.a-diary-habits-home :is(
+    .a-diary-habits__diary-files-stack,
+    .a-diary-habits__diary-content-stack
+  ) {
+    min-height: 0;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__diary-files-stack > .a-diary-habits__shared-content-panel,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__diary-files,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__diary-archive,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__diary-archive > .a-diary-habits__diary-column,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__diary-archive-grid {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__diary-archive > .a-diary-habits__diary-column,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__diary-archive-grid {
+    flex: 0 0 auto !important;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__diary-archive {
+    flex: 0 0 auto;
+    align-items: start;
+    align-content: start;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__diary-content .a-diary-habits__entry-card-time-input {
+    inline-size: 42cqw;
+    width: 42cqw;
+    min-width: 112px;
+    max-width: 150px;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__diary-content .a-diary-habits__entry-card-meta {
+    grid-template-columns: minmax(112px, 42cqw) minmax(0, 1fr) auto;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__habit-main {
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: visible;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__habit-main > :is(
+    .a-diary-habits__habit-week,
+    .a-diary-habits__habit-week-grid,
+    .a-diary-habits__habit-day-view-date,
+    .a-diary-habits__habit-day-grid
+  ) {
+    width: 700px;
+    min-width: 700px;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__events-toolbar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__event-date-controls,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__events-toolbar .a-diary-habits__shared-toolbar-actions-right {
+    grid-column: 1;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__event-date-controls {
+    justify-self: center;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__events-toolbar .a-diary-habits__shared-toolbar-actions-right {
+    justify-self: end;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-section-shell .a-diary-habits__tag-result-body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-section-shell .a-diary-habits__tag-result-tag-stack,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-section-shell .a-diary-habits__tag-result-title,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-section-shell .a-diary-habits__tag-result-content {
+    grid-column: 1;
+    box-sizing: border-box;
+    inline-size: 100%;
+    max-inline-size: 100%;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__tags-section-shell .a-diary-habits__tag-result-tag-stack > .a-diary-habits__tag-result-tag {
+    box-sizing: border-box;
+    inline-size: 100%;
+    max-inline-size: 100%;
+  }
+
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__daily-schedule-stats-grid,
+  .a-diary-habits.a-diary-habits-home .a-diary-habits__daily-progress-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .a-diary-habits.a-diary-habits-home :is(
+    .a-diary-habits__shared-section-title,
+    .a-diary-habits__shared-section-subtitle
+  ) {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Narrow desktop panes use the diary section width, not the device width. */
+@container diary-log-section (max-width: 760px) {
+  .a-diary-habits__card[data-section="log"] .a-diary-habits__diary-files-stack > .a-diary-habits__shared-content-panel,
+  .a-diary-habits__card[data-section="log"] .a-diary-habits__diary-files,
+  .a-diary-habits__card[data-section="log"] .a-diary-habits__diary-archive,
+  .a-diary-habits__card[data-section="log"] .a-diary-habits__diary-archive > .a-diary-habits__diary-column,
+  .a-diary-habits__card[data-section="log"] .a-diary-habits__diary-archive-grid {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .a-diary-habits__card[data-section="log"] .a-diary-habits__diary-archive,
+  .a-diary-habits__card[data-section="log"] .a-diary-habits__diary-archive > .a-diary-habits__diary-column,
+  .a-diary-habits__card[data-section="log"] .a-diary-habits__diary-archive-grid {
+    flex: 0 0 auto !important;
+  }
+
+  .a-diary-habits__card[data-section="log"] .a-diary-habits__diary-archive {
+    align-items: start;
+    align-content: start;
+  }
 }
 
 @media (max-width: 900px) {
