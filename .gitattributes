@@ -1,0 +1,4 @@
+# Preserve the exact bytes of Obsidian release assets.
+main.js -text
+manifest.json -text
+styles.css -text

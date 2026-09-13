@@ -1,0 +1,13 @@
+# Public release repository: deny everything unless explicitly allowlisted.
+*
+!.gitignore
+!.gitattributes
+!README.md
+!main.js
+!manifest.json
+!styles.css
+!versions.json
+!LICENSE
+!PRIVACY.md
+!THIRD_PARTY_NOTICES.md
+
