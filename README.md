@@ -1,4 +1,4 @@
-# A_DiaryHabits
+# A-Diary-Habits
 
 把习惯打卡、日记记录、话题标签与每日复盘集中在一个 Obsidian 主页中的个人记录插件。
 
@@ -13,7 +13,7 @@
 
 ## 付费与激活
 
-A_DiaryHabits 是需要购买许可证并激活后使用完整功能的付费插件。未激活时可在插件主页的激活区完成激活。
+A-Diary-Habits 是需要购买许可证并激活后使用完整功能的付费插件。未激活时可在插件主页的激活区完成激活。
 
 激活码请通过作者的正式销售或联系渠道获取：
 
@@ -25,7 +25,7 @@ A_DiaryHabits 是需要购买许可证并激活后使用完整功能的付费插
 
 ## 网络访问
 
-A_DiaryHabits 仅在许可证激活、验证、续签或恢复等必要场景连接授权服务。授权服务可能接收完成验证所必需的许可及匿名设备信息。插件不包含客户端遥测、使用行为分析或广告跟踪。
+A-Diary-Habits 仅在许可证激活、验证、续签或恢复等必要场景连接授权服务。授权服务可能接收完成验证所必需的许可及匿名设备信息。插件不包含客户端遥测、使用行为分析或广告跟踪。
 
 ## 数据与备份
 
@@ -45,7 +45,7 @@ A_DiaryHabits 仅在许可证激活、验证、续签或恢复等必要场景连
 
 ## Source and review
 
-A_DiaryHabits is a paid, license-activated plugin. Its complete source code is maintained in the private repository `VinVinVin444/A_DiaryHabits`. This public repository contains release files only and does not publish the plugin source code.
+A-Diary-Habits is a paid, license-activated plugin. Its complete source code is maintained in the private repository `VinVinVin444/A_DiaryHabits`. This public repository contains release files only and does not publish the plugin source code.
 
 Release builds may be submitted to the Obsidian Community Plugin Directory review and scanning process. The plugin contains no client telemetry, usage analytics, or advertising trackers.
 
@@ -55,4 +55,4 @@ Release builds may be submitted to the Obsidian Community Plugin Directory revie
 
 ## License
 
-A_DiaryHabits is proprietary commercial software. Redistribution, modification, reverse engineering, or resale is not permitted without the copyright holder's authorization. Third-party components remain governed by their respective licenses.
+A-Diary-Habits is proprietary commercial software. Redistribution, modification, reverse engineering, or resale is not permitted without the copyright holder's authorization. Third-party components remain governed by their respective licenses.
